@@ -108,6 +108,7 @@ def key_exists(bucket, key):
 
 async def key_exists_async(bucket, key, loop=None):
     '''Return true if a key exists in s3 bucket'''
+    # session = aiobotocore.get_session(loop=loop)
     session = aiobotocore.get_session(loop=loop)
     async with session.create_client('s3', use_ssl=False, verify=False) as client:
         try:
