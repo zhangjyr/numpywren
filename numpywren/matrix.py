@@ -390,7 +390,8 @@ class BigMatrix(object):
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
         key = self.__shard_idx_to_key__(block_idx)
-        session = aiobotocore.get_session(loop=loop)
+        # session = aiobotocore.get_session(loop=loop)
+        session = aiobotocore.get_session()
         async with session.create_client('s3', use_ssl=False, verify=False, region_name=self.region) as client:
             resp = await client.delete_object(Key=key, Bucket=self.bucket)
         return resp
@@ -498,7 +499,8 @@ class BigMatrix(object):
         if (loop == None):
             loop = asyncio.get_event_loop()
 
-        session = aiobotocore.get_session(loop=loop)
+        # session = aiobotocore.get_session(loop=loop)
+        session = aiobotocore.get_session()
         async with session.create_client('s3', use_ssl=False, verify=False, region_name=self.region) as client:
             n_tries = 0
             max_n_tries = 5
@@ -520,7 +522,8 @@ class BigMatrix(object):
         if (loop == None):
             loop = asyncio.get_event_loop()
 
-        session = aiobotocore.get_session(loop=loop)
+        # session = aiobotocore.get_session(loop=loop)
+        session = aiobotocore.get_session()
         async with session.create_client('s3', use_ssl=False, verify=False, region_name=self.region) as client:
             outb = io.BytesIO()
             np.save(outb, X)
@@ -805,7 +808,8 @@ class RowPivotedBigMatrix(BigMatrix):
         if (loop == None):
             loop = asyncio.get_event_loop()
 
-        session = aiobotocore.get_session(loop=loop)
+        # session = aiobotocore.get_session(loop=loop)
+        session = aiobotocore.get_session()
         async with session.create_client('s3', use_ssl=False, verify=False, region_name=self.region) as client:
             n_tries = 0
             max_n_tries = 5
